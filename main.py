@@ -49,6 +49,8 @@ tokens = (
    'SEMICOLON',
    'COLON',
    'DOT',   
+   'NUMBER',
+   'VAR'
 ) + tuple(reserved.values())
 
 ###### Braulio Rivas ######
@@ -76,7 +78,10 @@ t_DOT = r'\.'
 t_ignore  = ' \t'
 
 ###### 
-
+def t_NUMBER(t):
+    r'\d+(\.\d+)?'
+    t.value = float(t.value)
+    return t
 ###### Erick Lorenzo ######
 
 def t_VAR(t): 
@@ -94,7 +99,8 @@ def t_error(t):
 
 lexer = lex.lex()
 
-data = '''@
+data = '''
+b+9*h
 '''
 
 lexer.input(data)
