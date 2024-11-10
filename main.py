@@ -79,8 +79,13 @@ t_ignore  = ' \t'
 
 ###### 
 def t_NUMBER(t):
-    r'\d+(\.\d+)?'
-    t.value = float(t.value)
+    r'0[xX][0-9a-fA-F]+|\d+(\.\d*)?([eE][+-]?\d+)?'
+    if t.value.lower().startswith("0x"):
+        t.value = int(t.value, 16) 
+    elif 'e' in t.value.lower() or '.' in t.value:
+        t.value = float(t.value)
+    else:
+        t.value = int(t.value)
     return t
 ###### Erick Lorenzo ######
 
@@ -100,7 +105,7 @@ def t_error(t):
 lexer = lex.lex()
 
 data = '''
-b+9*h
+0x56
 '''
 
 lexer.input(data)
