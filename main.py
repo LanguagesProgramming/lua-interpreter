@@ -1,4 +1,5 @@
 import ply.lex as lex
+from test_lex import *
 
 ###### Ariel Vargas ######
 reserved = {
@@ -104,14 +105,4 @@ def t_error(t):
 
 lexer = lex.lex()
 
-data = '''
-0x56
-'''
-
-lexer.input(data)
-
-while True:
-    tok = lexer.token()
-    if not tok:
-        break
-    print(tok)
+test("factorial.lua", "erick.txt" ,lex)
