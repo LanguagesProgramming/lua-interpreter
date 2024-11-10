@@ -1,8 +1,31 @@
 import ply.lex as lex
 
 ###### Ariel Vargas ######
-reserved = {'if': 'IF', 'else': 'ELSE', 'while': 'WHILE', 'for': 'FOR'}
-######
+reserved = {
+    'and' : 'AND',
+    'break' : 'BREAK',
+    'do' : 'DO',
+    'else' : 'ELSE',
+    'elseif' : 'ELSEIF',
+    'end' : 'END',
+    'false' : 'FALSE',
+    'for' : 'FOR',
+    'function' : 'FUNCTION',
+    'if' : 'IF',
+    'in' : 'IN',
+    'local' : 'LOCAL',
+    'nil' : 'NIL',
+    'not' : 'NOT',
+    'or' : 'OR',
+    'repeat' : 'REPEAT',
+    'return' : 'RETURN',
+    'then' : 'THEN',
+    'true' : 'TRUE',
+    'until' : 'UNTIL',
+    'while' : 'WHILE'
+}
+
+##########
 
 tokens = (
    'PLUS',
