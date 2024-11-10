@@ -1,6 +1,8 @@
 import ply.lex as lex
 
+###### Ariel Vargas ######
 reserved = {'if': 'IF', 'else': 'ELSE', 'while': 'WHILE', 'for': 'FOR'}
+######
 
 tokens = (
    'INT',
@@ -20,6 +22,7 @@ tokens = (
    'PRINT',
 ) + tuple(reserved.values())
 
+###### Braulio Rivas ######
 t_PLUS    = r'\+'
 t_MINUS   = r'-'
 t_TIMES   = r'\*'
@@ -33,19 +36,11 @@ t_SEMICOLON = r';'
 t_COLON = r','
 t_ignore  = ' \t'
 
-def t_PRINT(t):
-    r'print'
-    return t
+###### 
 
-def t_DECIMAL(t):
-    r'(\d+\.\d+)'
-    t.value = float(t.value)
-    return t
+###### Erick Lorenzo ######
 
-def t_INT(t):
-    r'\d+'
-    t.value = int(t.value)
-    return t
+###### 
 
 def t_VAR(t): 
     r'[a-zA-Z_][a-zA-Z0-9_]*'
@@ -66,7 +61,6 @@ def t_error(t):
 lexer = lex.lex()
 
 data = '''
-5.2 ; print(hola) (1, 2, 3) []
 '''
 
 lexer.input(data)
