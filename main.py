@@ -5,35 +5,51 @@ reserved = {'if': 'IF', 'else': 'ELSE', 'while': 'WHILE', 'for': 'FOR'}
 ######
 
 tokens = (
-   'INT',
-   'DECIMAL',
    'PLUS',
-   'MINUS',
-   'TIMES',
-   'DIVIDE',
+   'HYPHEN',
+   'ASTERISC',
+   'SLASH',
+   'PERCENTAGE',
+   'CARET',
+   'HASH',
+   'EQUAL',
+   'TILDE',
+   'LESSTHAN',
+   'GREATERTHAN',
    'LPAREN',
    'RPAREN',
-   'LBRACKET',
-   'RBRACKET',
-   'MOD',
-   'VAR',
+   'LCURLYBRACKET',
+   'RCURLYBRACKET',
+   'LSQUAREDBRACKET',
+   'RSQUAREDBRACKET',
+   'COMMA',
    'SEMICOLON',
    'COLON',
-   'PRINT',
+   'DOT',   
 ) + tuple(reserved.values())
 
 ###### Braulio Rivas ######
 t_PLUS    = r'\+'
-t_MINUS   = r'-'
-t_TIMES   = r'\*'
-t_DIVIDE  = r'/'
-t_LPAREN  = r'\('
-t_RPAREN  = r'\)'
-t_LBRACKET = r'\['
-t_RBRACKET = r'\]'
-t_MOD = r'%'
+t_HYPHEN   = r'-'
+t_ASTERISC   = r'\*'
+t_SLASH = r'\/'
+t_PERCENTAGE = r'%'
+t_CARET = r'\^'
+t_HASH = r'\#'
+t_EQUAL = r'='
+t_TILDE = r'~'
+t_LESSTHAN = r'<'
+t_GREATERTHAN = r'>'
+t_LPAREN = r'\('
+t_RPAREN = r'\)'
+t_LCURLYBRACKET = r'\{'
+t_RCURLYBRACKET = r'\}'
+t_LSQUAREDBRACKET = r'\['
+t_RSQUAREDBRACKET = r'\]'
+t_COMMA = r','
 t_SEMICOLON = r';'
-t_COLON = r','
+t_COLON = r':'
+t_DOT = r'\.'
 t_ignore  = ' \t'
 
 ###### 
