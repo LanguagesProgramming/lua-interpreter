@@ -56,8 +56,6 @@ t_ignore  = ' \t'
 
 ###### Erick Lorenzo ######
 
-###### 
-
 def t_VAR(t): 
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     t.type = reserved.get(t.value, 'VAR')
@@ -67,16 +65,13 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
 
-
 def t_error(t):
-    print("Illegal character '%s'" % t.value[0])
+    print(f"{t.lineno}:{t.lexpos}: unexpected symbol {t.value[0]}" )
     t.lexer.skip(1)
-
-### 
 
 lexer = lex.lex()
 
-data = '''
+data = '''@
 '''
 
 lexer.input(data)
