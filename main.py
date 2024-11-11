@@ -50,6 +50,7 @@ tokens = (
    'SEMICOLON',
    'COLON',
    'DOT',   
+   'COMILLA',
    'NUMBER',
    'VAR'
 ) + tuple(reserved.values())
@@ -76,6 +77,7 @@ t_COMMA = r','
 t_SEMICOLON = r';'
 t_COLON = r':'
 t_DOT = r'\.'
+t_COMILLA = r'\"'
 t_ignore  = ' \t'
 
 ###### 
@@ -105,4 +107,5 @@ def t_error(t):
 
 lexer = lex.lex()
 
-test("factorial.lua", "erillope" ,lex)
+#test("factorial.lua", "erillope" ,lex)
+test("algoritmo_prueba1.lua", "Ariel-Vargas", lex)
