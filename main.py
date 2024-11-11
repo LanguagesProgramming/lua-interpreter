@@ -23,7 +23,8 @@ reserved = {
     'then' : 'THEN',
     'true' : 'TRUE',
     'until' : 'UNTIL',
-    'while' : 'WHILE'
+    'while' : 'WHILE',
+    'print' : 'PRINT'
 }
 ##########
 
@@ -50,6 +51,7 @@ tokens = (
    'SEMICOLON',
    'COLON',
    'DOT',   
+   'COMILLA',
    'NUMBER',
    'VAR',
    'STRING',
@@ -79,6 +81,7 @@ t_COMMA = r','
 t_SEMICOLON = r';'
 t_COLON = r':'
 t_DOT = r'\.'
+t_COMILLA = r'\"'
 t_ignore  = ' \t'
 ###### 
 
@@ -136,5 +139,6 @@ def t_error(t):
 
 lexer = lex.lex()
 
-# test("factorial.lua", "erillope", lex)
-# test("sort.lua", "brauliorivas", lex)
+test("Num_Par.lua", "Ariel-Vargas", lex)
+test("factorial.lua", "erillope", lex)
+test("sort.lua", "brauliorivas", lex)
