@@ -139,6 +139,6 @@ def t_error(t):
 
 lexer = lex.lex()
 
-test("Num_Par.lua", "Ariel-Vargas", lex)
-test("factorial.lua", "erillope", lex)
-test("sort.lua", "brauliorivas", lex)
+# test("Num_Par.lua", "Ariel-Vargas", lexer)
+# test("factorial.lua", "erillope", lexer)
+# test("sort.lua", "brauliorivas", lexer)
