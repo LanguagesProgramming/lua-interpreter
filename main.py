@@ -105,4 +105,4 @@ def t_error(t):
 
 lexer = lex.lex()
 
-test("factorial.lua", "erick.txt" ,lex)
+test("factorial.lua", "erillope" ,lex)
