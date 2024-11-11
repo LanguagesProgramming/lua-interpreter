@@ -25,7 +25,6 @@ reserved = {
     'until' : 'UNTIL',
     'while' : 'WHILE'
 }
-
 ##########
 
 tokens = (
@@ -77,8 +76,10 @@ t_SEMICOLON = r';'
 t_COLON = r':'
 t_DOT = r'\.'
 t_ignore  = ' \t'
-
 ###### 
+
+
+###### Erick Lorenzo ######
 def t_NUMBER(t):
     r'0[xX][0-9a-fA-F]+|\d+(\.\d*)?([eE][+-]?\d+)?'
     if t.value.lower().startswith("0x"):
@@ -88,7 +89,7 @@ def t_NUMBER(t):
     else:
         t.value = int(t.value)
     return t
-###### Erick Lorenzo ######
+######
 
 def t_VAR(t): 
     r'[a-zA-Z_][a-zA-Z0-9_]*'
@@ -105,4 +106,5 @@ def t_error(t):
 
 lexer = lex.lex()
 
-test("factorial.lua", "erillope" ,lex)
+# test("factorial.lua", "erillope", lex)
+# test("sort.lua", "brauliorivas", lex)
