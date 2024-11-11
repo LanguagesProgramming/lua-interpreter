@@ -16,4 +16,4 @@ def test(script: str, usuario: str, lexer):
         if not tok:
             break
         contenido += str(tok) + "\n"
-        log(usuario, contenido)
+    log(usuario, contenido)
