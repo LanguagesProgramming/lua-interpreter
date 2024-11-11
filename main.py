@@ -43,14 +43,13 @@ tokens = (
    'RPAREN',
    'LCURLYBRACKET',
    'RCURLYBRACKET',
-   'LSQUAREDBRACKET',
-   'RSQUAREDBRACKET',
    'COMMA',
    'SEMICOLON',
    'COLON',
    'DOT',   
    'NUMBER',
-   'VAR'
+   'VAR',
+   'STRING',
 ) + tuple(reserved.values())
 
 ###### Braulio Rivas ######
@@ -69,8 +68,6 @@ t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_LCURLYBRACKET = r'\{'
 t_RCURLYBRACKET = r'\}'
-t_LSQUAREDBRACKET = r'\['
-t_RSQUAREDBRACKET = r'\]'
 t_COMMA = r','
 t_SEMICOLON = r';'
 t_COLON = r':'
@@ -91,6 +88,21 @@ def t_NUMBER(t):
     return t
 ######
 
+def t_STRING_single(t):
+    r"'.*'"
+    t.type = 'STRING'
+    return t
+
+def t_STRING_double(t):
+    r'".*"'
+    t.type = 'STRING'
+    return t
+
+def t_STRING_multiline(t):
+    r"\[\[[^\[\[]*\]\]"
+    t.type = 'STRING'
+    return t
+
 def t_VAR(t): 
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     t.type = reserved.get(t.value, 'VAR')
@@ -104,7 +116,23 @@ def t_error(t):
     print(f"{t.lineno}:{t.lexpos}: unexpected symbol {t.value[0]}" )
     t.lexer.skip(1)
 
+
 lexer = lex.lex()
+
+data = """[[hola]]
+'hola'
+"hola"
+[[
+hello
+]]
+"""
+
+lexer.input(data)
+while True:
+    tok = lexer.token()
+    if not tok:
+        break
+    print(tok)
 
 # test("factorial.lua", "erillope", lex)
 # test("sort.lua", "brauliorivas", lex)
