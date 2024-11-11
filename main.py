@@ -35,8 +35,11 @@ tokens = (
    'PERCENTAGE',
    'CARET',
    'HASH',
+   'EQUALITY',
+   'DISTINCT',
+   'GEQUALTHAN',
+   'LEQUALTHAN',
    'EQUAL',
-   'TILDE',
    'LESSTHAN',
    'GREATERTHAN',
    'LPAREN',
@@ -50,6 +53,7 @@ tokens = (
    'NUMBER',
    'VAR',
    'STRING',
+   'COMMENT',
 ) + tuple(reserved.values())
 
 ###### Braulio Rivas ######
@@ -60,8 +64,11 @@ t_SLASH = r'\/'
 t_PERCENTAGE = r'%'
 t_CARET = r'\^'
 t_HASH = r'\#'
+t_DISTINCT = r'~='
+t_GEQUALTHAN = r'>='
+t_LEQUALTHAN = r'<='
+t_EQUALITY = r'=='
 t_EQUAL = r'='
-t_TILDE = r'~'
 t_LESSTHAN = r'<'
 t_GREATERTHAN = r'>'
 t_LPAREN = r'\('
@@ -88,6 +95,16 @@ def t_NUMBER(t):
     return t
 ######
 
+def t_COMMENT_mline(t):
+    r'-- \[\[[^\[]*\]\]'
+    t.type = 'COMMENT'
+    return t
+
+def t_COMMENT_oline(t):
+    r'-- .*'
+    t.type = 'COMMENT'
+    return t
+
 def t_STRING_single(t):
     r"'.*'"
     t.type = 'STRING'
@@ -99,7 +116,7 @@ def t_STRING_double(t):
     return t
 
 def t_STRING_multiline(t):
-    r"\[\[[^\[\[]*\]\]"
+    r"\[\[[^\[]*\]\]"
     t.type = 'STRING'
     return t
 
@@ -118,21 +135,6 @@ def t_error(t):
 
 
 lexer = lex.lex()
-
-data = """[[hola]]
-'hola'
-"hola"
-[[
-hello
-]]
-"""
-
-lexer.input(data)
-while True:
-    tok = lexer.token()
-    if not tok:
-        break
-    print(tok)
 
 # test("factorial.lua", "erillope", lex)
 # test("sort.lua", "brauliorivas", lex)
