@@ -99,7 +99,7 @@ def t_NUMBER(t):
 ######
 
 def t_COMMENT_mline(t):
-    r'-- \[\[[^\[]*\]\]'
+    r'-- \[\[.*\]\]'
     t.type = 'COMMENT'
     return t
 
@@ -109,7 +109,7 @@ def t_COMMENT_oline(t):
     return t
 
 def t_STRING_single(t):
-    r"'.*'"
+    r"''"
     t.type = 'STRING'
     return t
 
@@ -136,9 +136,26 @@ def t_error(t):
     print(f"{t.lineno}:{t.lexpos}: unexpected symbol {t.value[0]}" )
     t.lexer.skip(1)
 
+data = """
+c = [[ asd
+]]
+
+-- [[
+    asd
+]]
+
+"""
 
 lexer = lex.lex()
 
-test("Num_Par.lua", "Ariel-Vargas", lex)
-test("factorial.lua", "erillope", lex)
-test("sort.lua", "brauliorivas", lex)
+lexer.input(data)
+
+while True:
+    tok = lexer.token()
+    if not tok:
+        break
+    print(tok)
+
+# test("Num_Par.lua", "Ariel-Vargas", lex)
+# test("factorial.lua", "erillope", lex)
+# test("sort.lua", "brauliorivas", lex)
