@@ -146,16 +146,6 @@ c = [[ asd
 
 """
 
-lexer = lex.lex()
-
-lexer.input(data)
-
-while True:
-    tok = lexer.token()
-    if not tok:
-        break
-    print(tok)
-
-# test("Num_Par.lua", "Ariel-Vargas", lex)
-# test("factorial.lua", "erillope", lex)
-# test("sort.lua", "brauliorivas", lex)
+# test("Num_Par.lua", "Ariel-Vargas", lexer)
+# test("factorial.lua", "erillope", lexer)
+# test("sort.lua", "brauliorivas", lexer)
