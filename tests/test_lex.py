@@ -1,10 +1,11 @@
 import datetime
 
-def log(usuario: str, contenido: str):
-    hora_actual = datetime.datetime.now()
-    fecha_hora_formateada = hora_actual.strftime("%Y-%m-%d-%H-%M-%S")
-    with open("logs/lexico-"+usuario+"-"+str(fecha_hora_formateada)+'.txt', 'w') as archivo:
-        archivo.write(contenido)
+def log(user: str, content: str):
+    current_time = datetime.datetime.now()
+    formatted_date = current_time.strftime("%Y-%m-%d-%H-%M-%S")
+
+    with open(f"logs/lexico-{user}-{str(formatted_date)}.txt", 'w') as file:
+        file.write(content)
 
 def test(script: str, usuario: str, lexer):
     with open(script, 'r') as archivo:
