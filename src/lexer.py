@@ -1,5 +1,4 @@
 import ply.lex as lex
-#from test_lex import *
 
 ###### Ariel Vargas ######
 reserved = {
@@ -136,6 +135,6 @@ def t_error(t):
     print(f"{t.lineno}:{t.lexpos}: unexpected symbol {t.value[0]}" )
     t.lexer.skip(1)
 
-# test("Num_Par.lua", "Ariel-Vargas", lexer)
-# test("factorial.lua", "erillope", lexer)
-# test("sort.lua", "brauliorivas", lexer)
+def p_error(p):
+    print("Syntax error")
+
