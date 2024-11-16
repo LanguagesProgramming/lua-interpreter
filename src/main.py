@@ -1,5 +1,5 @@
 import ply.lex as lex
-from test_lex import *
+#from test_lex import *
 
 ###### Ariel Vargas ######
 reserved = {
