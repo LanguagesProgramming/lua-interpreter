@@ -124,7 +124,7 @@ def t_STRING_multiline(t):
 
 def t_VAR(t): 
     r'[a-zA-Z_][a-zA-Z0-9_]*'
-    t.type = reserved.get(t.value, 'VAR')
+    t.type = 'VAR'
     return t
 
 def t_newline(t):
@@ -135,6 +135,4 @@ def t_error(t):
     print(f"{t.lineno}:{t.lexpos}: unexpected symbol {t.value[0]}" )
     t.lexer.skip(1)
 
-def p_error(p):
-    print("Syntax error")
-
+lexer = lex.lex()
