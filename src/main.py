@@ -136,16 +136,6 @@ def t_error(t):
     print(f"{t.lineno}:{t.lexpos}: unexpected symbol {t.value[0]}" )
     t.lexer.skip(1)
 
-data = """
-c = [[ asd
-]]
-
--- [[
-    asd
-]]
-
-"""
-
 # test("Num_Par.lua", "Ariel-Vargas", lexer)
 # test("factorial.lua", "erillope", lexer)
 # test("sort.lua", "brauliorivas", lexer)
