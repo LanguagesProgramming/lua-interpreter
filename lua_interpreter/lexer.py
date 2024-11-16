@@ -1,4 +1,4 @@
-import ply.lex as lex
+from lua_interpreter.ply import lex as lex
 
 ###### Ariel Vargas ######
 reserved = {

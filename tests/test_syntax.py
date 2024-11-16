@@ -1,7 +1,7 @@
 import sys
 import os
-from tests_lib import validate_args
-from src.parser import parser
+from lua_interpreter.parser import parser
+from .tests_lib import validate_args
 
 def run():
     arguments = sys.argv
