@@ -19,7 +19,7 @@ def run():
         lua_file = open(lua_file_path, "r")
         for line in lua_file:
             result = parser.parse(line)
-            log_file.write(f"{result}")
+            log_file.write(f"Lua: {line} :: {result}\n")
 
         lua_file.close()
         log_file.close()

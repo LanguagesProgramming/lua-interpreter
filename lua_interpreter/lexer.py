@@ -1,6 +1,5 @@
 from lua_interpreter.ply import lex as lex
 
-###### Ariel Vargas ######
 reserved = {
     'and' : 'AND',
     'break' : 'BREAK',
@@ -25,11 +24,10 @@ reserved = {
     'while' : 'WHILE',
     'print' : 'PRINT'
 }
-##########
 
 tokens = (
    'PLUS',
-   'HYPHEN',
+   'MINUS',
    'ASTERISC',
    'SLASH',
    'PERCENTAGE',
@@ -50,16 +48,14 @@ tokens = (
    'SEMICOLON',
    'COLON',
    'DOT',   
-   'COMILLA',
    'NUMBER',
-   'VAR',
+   'NAME',
    'STRING',
    'COMMENT',
 ) + tuple(reserved.values())
 
-###### Braulio Rivas ######
 t_PLUS    = r'\+'
-t_HYPHEN   = r'-'
+t_MINUS   = r'-'
 t_ASTERISC   = r'\*'
 t_SLASH = r'\/'
 t_PERCENTAGE = r'%'
@@ -80,12 +76,9 @@ t_COMMA = r','
 t_SEMICOLON = r';'
 t_COLON = r':'
 t_DOT = r'\.'
-t_COMILLA = r'\"'
 t_ignore  = ' \t'
-###### 
 
 
-###### Erick Lorenzo ######
 def t_NUMBER(t):
     r'0[xX][0-9a-fA-F]+|\d+(\.\d*)?([eE][+-]?\d+)?'
     if t.value.lower().startswith("0x"):
@@ -95,20 +88,19 @@ def t_NUMBER(t):
     else:
         t.value = int(t.value)
     return t
-######
 
 def t_COMMENT_mline(t):
-    r'-- \[\[.*\]\]'
+    r'--\ \[\[(.|\n)*?\]\]'
     t.type = 'COMMENT'
-    return t
+    pass
 
 def t_COMMENT_oline(t):
     r'-- .*'
     t.type = 'COMMENT'
-    return t
+    pass
 
 def t_STRING_single(t):
-    r"''"
+    r"'.*'"
     t.type = 'STRING'
     return t
 
@@ -118,13 +110,13 @@ def t_STRING_double(t):
     return t
 
 def t_STRING_multiline(t):
-    r"\[\[[^\[]*\]\]"
+    r'\[\[(.|\n)*?\]\]'
     t.type = 'STRING'
     return t
 
-def t_VAR(t): 
+def t_NAME(t): 
     r'[a-zA-Z_][a-zA-Z0-9_]*'
-    t.type = 'VAR'
+    t.type = 'NAME'
     return t
 
 def t_newline(t):
