@@ -1,5 +1,3 @@
-import io
-from contextlib import redirect_stdout
 from lua_interpreter.parser import parser
 from lua_interpreter.lexer import lexer
 
