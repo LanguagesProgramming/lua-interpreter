@@ -1,7 +1,13 @@
 # lua-interpreter
 Lua interpreter made with Python using PLY (Python Lex-Yacc)
 
-## To test your lua file
+## Usage
+
+```
+python3 main.py
+```
+
+## To test your `Lua` file
 
 ### Syntax
 ```sh
