@@ -116,7 +116,7 @@ def t_STRING_multiline(t):
 
 def t_NAME(t): 
     r'[a-zA-Z_][a-zA-Z0-9_]*'
-    t.type = 'NAME'
+    t.type = reserved.get(t.value, 'NAME')
     return t
 
 def t_newline(t):

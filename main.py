@@ -1,8 +1,26 @@
+import io
+from contextlib import redirect_stdout
 from lua_interpreter.parser import parser
 from lua_interpreter.lexer import lexer
 
 lua_code = '''
-lua_code, h = 3, 2
+local function bubble_sort(arr)
+    local n = #arr
+    for i = 1, n - 1 do
+        for j = 1, n - i do
+            if arr[j] > arr[j + 1] then
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+            end
+        end
+    end
+end
+
+local array = { 5, 4, 3, 2, 1 }
+bubble_sort(array)
+
+for i = 1, #array do
+    print(array[i])
+end
 '''
 
 def run():
@@ -16,8 +34,10 @@ def run():
     print("\nEnd of Lexical Analysis\n")
 
     print("\nParsing\n")
-    parse_result = parser.parse(lua_code)
-    print(parse_result)
+    lines = lua_code.split("\n")
+    for line in lines:
+        parser.parse(line)
+
     print("\nEnd of Parsing\n")
 
 

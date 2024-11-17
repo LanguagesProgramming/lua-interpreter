@@ -92,6 +92,6 @@ def p_empty(p):
     'empty :'
 
 def p_error(p):
-    print(f"Syntax error near '{p.value[0]}'")
+    print(f"Syntax error near '{p}'")
 
 parser = yacc.yacc()

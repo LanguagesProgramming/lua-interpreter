@@ -1,0 +1,51 @@
+[Lua] local function bubble_sort(arr) [Parse Result] Syntax error near 'None'
+
+[Lua] local n = #arr [Parse Result] Syntax error near 'LexToken(NAME,'n',2,10)'
+
+[Lua] for i = 1, n - 1 do [Parse Result] Syntax error near 'LexToken(FOR,'for',3,4)'
+Syntax error near 'LexToken(NAME,'n',3,15)'
+
+[Lua] for j = 1, n - i do [Parse Result] Syntax error near 'LexToken(FOR,'for',4,8)'
+Syntax error near 'LexToken(NAME,'n',4,19)'
+
+[Lua] if arr[j] > arr[j + 1] then [Parse Result] Syntax error near 'LexToken(IF,'if',5,12)'
+5:18: unexpected symbol [
+5:20: unexpected symbol ]
+5:27: unexpected symbol [
+5:33: unexpected symbol ]
+
+[Lua] arr[j], arr[j + 1] = arr[j + 1], arr[j] [Parse Result] 6:19: unexpected symbol [
+Syntax error near 'LexToken(NAME,'j',6,20)'
+6:21: unexpected symbol ]
+6:27: unexpected symbol [
+6:33: unexpected symbol ]
+6:40: unexpected symbol [
+6:46: unexpected symbol ]
+6:52: unexpected symbol [
+6:54: unexpected symbol ]
+
+[Lua] end [Parse Result] Syntax error near 'LexToken(END,'end',7,12)'
+
+[Lua] end [Parse Result] Syntax error near 'LexToken(END,'end',8,8)'
+
+[Lua] end [Parse Result] Syntax error near 'LexToken(END,'end',9,4)'
+
+[Lua] end [Parse Result] Syntax error near 'LexToken(END,'end',10,0)'
+
+[Lua]  [Parse Result] 
+
+[Lua] local array = { 5, 4, 3, 2, 1 } [Parse Result] Syntax error near 'LexToken(NAME,'array',12,6)'
+
+[Lua] bubble_sort(array) [Parse Result] Syntax error near 'LexToken(LPAREN,'(',13,11)'
+
+[Lua]  [Parse Result] 
+
+[Lua] for i = 1, #array do [Parse Result] Syntax error near 'LexToken(FOR,'for',15,0)'
+Syntax error near 'LexToken(HASH,'#',15,11)'
+
+[Lua] print(array[i]) [Parse Result] Syntax error near 'LexToken(PRINT,'print',16,4)'
+16:15: unexpected symbol [
+16:17: unexpected symbol ]
+
+[Lua] end [Parse Result] Syntax error near 'LexToken(END,'end',17,0)'
+
