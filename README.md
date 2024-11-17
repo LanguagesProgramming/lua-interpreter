@@ -1,14 +1,14 @@
 # lua-interpreter
 Lua interpreter made with Python using PLY (Python Lex-Yacc)
 
-## To run this project
+## To test your lua file
 
-1. Create a new virtual python environment
+### Syntax
+```sh
+python3 -m tests.test_syntax <your_github_username> <your_lua_file>
+```
+e.g.
+```sh
+python3 -m tests.test_syntax brauliorivas sort.lua
+```
 
-2. Start the environment.
-
-3. Install dependencies with `pip3 install -r requirements.txt`
-
-4. Run main file `python3 main.py`
-
-5. Don't forget to deactivate virtual environment when finishing your session.
