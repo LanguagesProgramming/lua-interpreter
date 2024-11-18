@@ -14,35 +14,30 @@ def p_list_statements(p):
 def p_block(p):
     'block : chunk'
 
-def p_for_loop(p):
-    '''for_loop: FOR namelist EQUAL exp COMMA exp DO block END 
-    | FOR namelist IN list DO block END'''
- 
 def p_statement(p):
     '''statement : assignment
                  | functioncall
+                 | while_do
+                 | repeat_until
                  | function_statement
                  | local_function_statement
-                 | local_assignment
-                 | while_do
-                 | repeat_until'''
-
-###### Ariel Vargas #######
-def p_while_do(p):
-    ''' 
-    while_do : WHILE exp DO block END
-    '''
-
-def p_repeat_until(p):
-    '''
-    repeat_until : REPEAT block UNTIL exp
-    '''
-
-#########
+                 | local_assignment'''
 
 def p_assignment(p):
     'assignment : varlist EQUAL explist'
 
+###### Ariel Vargas #######
+def p_while_do(p):
+    'while_do : WHILE exp DO block END'
+
+def p_repeat_until(p):
+    'repeat_until : REPEAT block UNTIL exp'
+#########
+
+def p_for(p):
+    '''for : FOR NAME EQUAL exp COMMA exp DO block END 
+           | FOR namelist IN explist DO block END'''
+ 
 def p_function_statement(p):
     'function_statement : FUNCTION funcname funcbody'
 
@@ -60,9 +55,6 @@ def p_last_statement(p):
 
 def p_funcname(p):
     '''funcname : NAME'''
-
-def p_list(p):
-    '''list: {varlist}'''
     
 def p_varlist(p):
     '''varlist : var 
@@ -146,8 +138,6 @@ def p_unop(p):
 
 def p_empty(p):
     'empty :'
-
-
 
 def p_error(p):
     try:
