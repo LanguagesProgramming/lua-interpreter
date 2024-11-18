@@ -1,7 +1,7 @@
 from lua_interpreter.parser import parser
 from lua_interpreter.lexer import lexer
 
-lua_code = '''FOR t IN lista DO END'''
+lua_code = '''l = {a,b,c}'''
 
 def run():
     lexer.input(lua_code)

@@ -3,6 +3,7 @@ from lua_interpreter.lexer import tokens
 
 def p_chunk(p):
     '''chunk : empty
+            | for_loop
             | list_statements
             | last_statement
             | list_statements last_statement'''
