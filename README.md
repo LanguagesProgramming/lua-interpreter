@@ -1,14 +1,29 @@
 # lua-interpreter
 Lua interpreter made with Python using PLY (Python Lex-Yacc)
 
-## To run this project
+## Usage
 
-1. Create a new virtual python environment
+```
+python3 main.py
+```
+## Development
 
-2. Start the environment.
+You can install nodemon to watch for changes on files and test new functionality. On a shell you can run
+```sh
+nodemon --exec python3 main.py
+```
 
-3. Install dependencies with `pip3 install -r requirements.txt`
+You may install nodemon by using `npm install -g nodemon`
 
-4. Run main file `python3 main.py`
 
-5. Don't forget to deactivate virtual environment when finishing your session.
+## To test your `Lua` file
+
+### Syntax
+```sh
+python3 -m tests.test_syntax <your_github_username> <your_lua_file>
+```
+e.g.
+```sh
+python3 -m tests.test_syntax brauliorivas sort.lua
+```
+
