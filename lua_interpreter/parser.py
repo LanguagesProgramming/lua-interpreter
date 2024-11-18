@@ -27,6 +27,7 @@ def p_statement(p):
 
 def p_assignment(p):
     '''assignment : varlist EQUAL explist
+                    | NAME EQUAL exp
                     | namelist EQUAL explist
                     | NAME EQUAL explist
                     | NAME EQUAL NUMBER
@@ -42,8 +43,8 @@ def p_repeat_until(p):
 
 ###### Erick Lorenzo #######
 def p_for(p):
-    '''for : FOR NAME EQUAL exp COMMA exp DO chunk END 
-           | FOR namelist IN NAME DO NEWLINE chunk END'''
+    '''for : FOR NAME EQUAL exp COMMA exp DO list_statements END 
+           | FOR namelist IN NAME DO list_statements END'''
 #########
 
 def p_function_statement(p):
@@ -90,6 +91,7 @@ def p_exp(p):
            | FALSE
            | TRUE
            | NUMBER
+           | NAME
            | STRING
            | TRIPLEDOT
            | function

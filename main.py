@@ -1,6 +1,7 @@
 from lua_interpreter.parser import parser
 from lua_interpreter.lexer import lexer
 
+
 lua_code = '''while 1 do
     repeat
         x = 1
