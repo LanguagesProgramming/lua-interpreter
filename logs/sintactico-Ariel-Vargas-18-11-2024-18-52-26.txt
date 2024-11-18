@@ -1,0 +1,12 @@
+[Lua] local i = 1 [Parse Result] 11: Syntax error near '
+'
+
+[Lua] while i <= 5 do [Parse Result] Syntax error near 'None'
+
+[Lua] print("Contador: " .. i) [Parse Result] 4: Syntax error near 'print'
+
+[Lua] i = i + 1 [Parse Result] 13: Syntax error near '
+'
+
+[Lua] end [Parse Result] 0: Syntax error near 'end'
+
