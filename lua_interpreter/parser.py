@@ -20,6 +20,7 @@ def p_statement(p):
                  | functioncall
                  | while_do
                  | repeat_until
+                 | for
                  | function_statement
                  | local_function_statement
                  | local_assignment'''
