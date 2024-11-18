@@ -22,6 +22,7 @@ reserved = {
     'true' : 'TRUE',
     'until' : 'UNTIL',
     'while' : 'WHILE',
+    'print' : 'PRINT'
 }
 
 tokens = (

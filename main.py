@@ -1,7 +1,11 @@
 from lua_interpreter.parser import parser
 from lua_interpreter.lexer import lexer
 
-lua_code = '''l = {a,b,c}'''
+lua_code = '''local numeros = {5,6,7,8}
+for n in numeros do
+    print
+    
+'''
 
 def run():
     lexer.input(lua_code)

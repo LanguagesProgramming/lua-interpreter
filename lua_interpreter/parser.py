@@ -3,7 +3,6 @@ from lua_interpreter.lexer import tokens
 
 def p_chunk(p):
     '''chunk : empty
-            | for_loop
             | list_statements
             | last_statement
             | list_statements last_statement'''
@@ -13,8 +12,7 @@ def p_list_statements(p):
                        | statement SEMICOLON list_statements'''
 
 def p_block(p):
-    '''block : chunk
-            | NEWLINE'''
+    '''block : chunk'''
 
 def p_statement(p):
     '''statement : assignment
@@ -24,10 +22,15 @@ def p_statement(p):
                  | for
                  | function_statement
                  | local_function_statement
-                 | local_assignment'''
+                 | local_assignment
+                 | NEWLINE statement'''
 
 def p_assignment(p):
-    'assignment : varlist EQUAL explist'
+    '''assignment : varlist EQUAL explist
+                    | namelist EQUAL explist
+                    | NAME EQUAL explist
+                    | NAME EQUAL NUMBER
+                    | NAME EQUAL NAME'''
 
 ###### Ariel Vargas #######
 def p_while_do(p):
@@ -39,8 +42,8 @@ def p_repeat_until(p):
 
 ###### Erick Lorenzo #######
 def p_for(p):
-    '''for : FOR NAME EQUAL exp COMMA exp DO block END 
-           | FOR namelist IN explist DO block END'''
+    '''for : FOR NAME EQUAL exp COMMA exp DO chunk END 
+           | FOR namelist IN NAME DO NEWLINE chunk END'''
 #########
 
 def p_function_statement(p):
@@ -48,10 +51,12 @@ def p_function_statement(p):
 
 def p_local_function_statement(p):
     'local_function_statement : LOCAL FUNCTION NAME funcbody'
-
+                      
 def p_local_assignment(p):
     '''local_assignment : LOCAL namelist
-                      | LOCAL namelist EQUAL explist'''
+                      | LOCAL namelist EQUAL explist
+                      | LOCAL NAME EQUAL explist
+                      | LOCAL NAME EQUAL var'''
 
 def p_last_statement(p):
     '''last_statement : RETURN 
@@ -67,6 +72,9 @@ def p_varlist(p):
 
 def p_var(p):
     '''var : NAME
+            | NAME LSQUAREDBRACKET NUMBER RSQUAREDBRACKET
+            | NAME LSQUAREDBRACKET var RSQUAREDBRACKET
+            | NUMBER
            | prefixexp LSQUAREDBRACKET exp RSQUAREDBRACKET
            | prefixexp DOT NAME'''
 
@@ -75,8 +83,7 @@ def p_namelist(p):
                 | NAME COMMA namelist'''
 
 def p_explist(p):
-    '''explist : exp
-               | exp COMMA explist''' 
+    '''explist : LCURLYBRACKET varlist RCURLYBRACKET''' 
 
 def p_exp(p):
     '''exp : NIL
@@ -160,5 +167,5 @@ precedence = (
         ('left', 'NOT', 'LENGTH'),
 )
 
-start = 'chunk'
+start = 'block'
 parser = yacc.yacc()
