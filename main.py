@@ -1,10 +1,10 @@
 from lua_interpreter.parser import parser
 from lua_interpreter.lexer import lexer
 
-lua_code = '''local numeros = {5,6,7,8}
+lua_code = '''local suma = 0
+local numeros = {5,6,7}
 for n in numeros do
-    print
-    
+    suma = suma + n
 '''
 
 def run():
