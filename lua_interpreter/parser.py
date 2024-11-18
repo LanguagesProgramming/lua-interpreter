@@ -12,11 +12,12 @@ def p_list_statements(p):
                        | statement SEMICOLON list_statements'''
 
 def p_block(p):
-    'block : chunk'
+    '''block : chunk
+            | NEWLINE'''
 
 def p_for_loop(p):
-    '''for_loop: FOR namelist EQUAL exp COMMA exp DO block END 
-    | FOR namelist IN list DO block END'''
+    '''for_loop : FOR namelist EQUAL exp COMMA exp DO block END
+    | FOR namelist IN NAME DO block END'''
  
 def p_statement(p):
     '''statement : assignment
@@ -61,8 +62,8 @@ def p_last_statement(p):
 def p_funcname(p):
     '''funcname : NAME'''
 
-def p_list(p):
-    '''list: {varlist}'''
+def p_explist(p):
+    '''explist : LCURLYBRACKET varlist RCURLYBRACKET'''
     
 def p_varlist(p):
     '''varlist : var 
@@ -165,4 +166,5 @@ precedence = (
         ('left', 'NOT', 'LENGTH'),
 )
 
+start = 'chunk'
 parser = yacc.yacc()

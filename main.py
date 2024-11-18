@@ -1,12 +1,7 @@
 from lua_interpreter.parser import parser
 from lua_interpreter.lexer import lexer
 
-lua_code = '''
-repeat
-    x = 1
-until x > 10
-
-'''
+lua_code = '''FOR t IN lista DO END'''
 
 def run():
     lexer.input(lua_code)

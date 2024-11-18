@@ -54,6 +54,7 @@ tokens = (
    'NAME',
    'STRING',
    'COMMENT',
+   'NEWLINE'
 ) + tuple(reserved.values())
 
 t_PLUS    = r'\+'
@@ -83,7 +84,11 @@ t_TRIPLEDOT = r'\.\.\.'
 t_DOT = r'\.'
 t_ignore  = ' \t'
 
-
+def t_NEWLINE(t):
+    r'(\r\n|\n|\r)+'
+    t.lexer.lineno += len(t.value)
+    return t;
+    
 def t_NUMBER(t):
     r'0[xX][0-9a-fA-F]+|\d+(\.\d*)?([eE][+-]?\d+)?'
     if t.value.lower().startswith("0x"):
@@ -121,7 +126,7 @@ def t_STRING_multiline(t):
 
 def t_NAME(t): 
     r'[a-zA-Z_][a-zA-Z0-9_]*'
-    t.type = reserved.get(t.value, 'NAME')
+    t.type = reserved.get(t.value.lower(), 'NAME')
     return t
 
 def t_newline(t):
