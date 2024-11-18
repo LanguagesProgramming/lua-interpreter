@@ -14,6 +14,10 @@ def p_list_statements(p):
 def p_block(p):
     'block : chunk'
 
+def p_for_loop(p):
+    '''for_loop: FOR namelist EQUAL exp COMMA exp DO block END 
+    | FOR namelist IN list DO block END'''
+ 
 def p_statement(p):
     '''statement : assignment
                  | functioncall
@@ -42,6 +46,9 @@ def p_last_statement(p):
 def p_funcname(p):
     '''funcname : NAME'''
 
+def p_list(p):
+    '''list: [varlist]'''
+    
 def p_varlist(p):
     '''varlist : var 
                 | var COMMA varlist'''
