@@ -62,7 +62,7 @@ def p_funcname(p):
     '''funcname : NAME'''
 
 def p_list(p):
-    '''list: [varlist]'''
+    '''list: {varlist}'''
     
 def p_varlist(p):
     '''varlist : var 
