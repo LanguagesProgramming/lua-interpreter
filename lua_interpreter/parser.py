@@ -13,7 +13,7 @@ def p_list_statements(p):
 
 def p_block(p):
     '''block : chunk
-            | NEWLINE'''
+             | NEWLINE'''
 
 def p_statement(p):
     '''statement : assignment
@@ -50,7 +50,7 @@ def p_local_function_statement(p):
 
 def p_local_assignment(p):
     '''local_assignment : LOCAL namelist
-                      | LOCAL namelist EQUAL explist'''
+                        | LOCAL namelist EQUAL explist'''
 
 def p_last_statement(p):
     '''last_statement : RETURN 
@@ -62,7 +62,7 @@ def p_funcname(p):
    
 def p_varlist(p):
     '''varlist : var 
-                | var COMMA varlist'''
+               | var COMMA varlist'''
 
 def p_var(p):
     '''var : NAME
