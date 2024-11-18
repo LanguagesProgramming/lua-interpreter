@@ -22,17 +22,16 @@ reserved = {
     'true' : 'TRUE',
     'until' : 'UNTIL',
     'while' : 'WHILE',
-    'print' : 'PRINT'
 }
 
 tokens = (
    'PLUS',
    'MINUS',
-   'ASTERISC',
-   'SLASH',
-   'PERCENTAGE',
+   'MULTIPLY',
+   'DIVIDE',
+   'MODULO',
    'CARET',
-   'HASH',
+   'LENGTH',
    'EQUALITY',
    'DISTINCT',
    'GEQUALTHAN',
@@ -44,10 +43,13 @@ tokens = (
    'RPAREN',
    'LCURLYBRACKET',
    'RCURLYBRACKET',
+   'LSQUAREDBRACKET',
+   'RSQUAREDBRACKET',
    'COMMA',
    'SEMICOLON',
    'COLON',
    'DOT',   
+   'TRIPLEDOT',
    'NUMBER',
    'NAME',
    'STRING',
@@ -56,11 +58,11 @@ tokens = (
 
 t_PLUS    = r'\+'
 t_MINUS   = r'-'
-t_ASTERISC   = r'\*'
-t_SLASH = r'\/'
-t_PERCENTAGE = r'%'
+t_MULTIPLY   = r'\*'
+t_DIVIDE = r'\/'
+t_MODULO = r'%'
 t_CARET = r'\^'
-t_HASH = r'\#'
+t_LENGTH = r'\#'
 t_DISTINCT = r'~='
 t_GEQUALTHAN = r'>='
 t_LEQUALTHAN = r'<='
@@ -72,9 +74,12 @@ t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_LCURLYBRACKET = r'\{'
 t_RCURLYBRACKET = r'\}'
+t_LSQUAREDBRACKET = r'\['
+t_RSQUAREDBRACKET = r'\]'
 t_COMMA = r','
 t_SEMICOLON = r';'
 t_COLON = r':'
+t_TRIPLEDOT = r'\.\.\.'
 t_DOT = r'\.'
 t_ignore  = ' \t'
 

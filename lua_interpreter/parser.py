@@ -16,8 +16,10 @@ def p_block(p):
 
 def p_statement(p):
     '''statement : assignment
+                 | functioncall
                  | function_statement
-                 | local_function'''
+                 | local_function_statement
+                 | local_assignment'''
 
 def p_assignment(p):
     'assignment : varlist EQUAL explist'
@@ -25,8 +27,12 @@ def p_assignment(p):
 def p_function_statement(p):
     'function_statement : FUNCTION funcname funcbody'
 
-def p_local_function(p):
-    'local_function : LOCAL FUNCTION NAME funcbody'
+def p_local_function_statement(p):
+    'local_function_statement : LOCAL FUNCTION NAME funcbody'
+
+def p_local_assignment(p):
+    '''local_assignment : LOCAL namelist
+                      | LOCAL namelist EQUAL explist'''
 
 def p_last_statement(p):
     '''last_statement : RETURN 
@@ -41,7 +47,9 @@ def p_varlist(p):
                 | var COMMA varlist'''
 
 def p_var(p):
-    'var : NAME'
+    '''var : NAME
+           | prefixexp LSQUAREDBRACKET exp RSQUAREDBRACKET
+           | prefixexp DOT NAME'''
 
 def p_namelist(p):
     '''namelist : NAME
@@ -56,7 +64,22 @@ def p_exp(p):
            | FALSE
            | TRUE
            | NUMBER
-           | STRING'''
+           | STRING
+           | TRIPLEDOT
+           | function
+           | prefixexp
+           | exp binop exp
+           | unop exp'''
+
+def p_prefixexp(p):
+    '''prefixexp : var 
+                 | functioncall
+                 | LPAREN exp RPAREN'''
+
+def p_functioncall(p):
+    '''functioncall : prefixexp args
+                    | prefixexp COLON NAME args
+                    | prefixexp DOT NAME'''
 
 def p_args(p):
     '''args : LPAREN RPAREN
@@ -71,7 +94,9 @@ def p_funcbody(p):
                 | LPAREN parlist RPAREN block END'''
 
 def p_parlist(p):
-    '''parlist : namelist'''
+    '''parlist : namelist
+               | namelist COMMA TRIPLEDOT
+               | TRIPLEDOT'''
 
 def p_fieldsep(p):
     '''fielsep : COMMA
@@ -80,18 +105,39 @@ def p_fieldsep(p):
 def p_binop(p):
     '''binop : PLUS
              | MINUS
-             | ASTERISC
-             | SLASH'''
+             | MULTIPLY 
+             | DIVIDE
+             | MODULO
+             | LESSTHAN
+             | LEQUALTHAN
+             | GREATERTHAN
+             | GEQUALTHAN
+             | EQUALITY
+             | DISTINCT
+             | AND
+             | OR'''
 
 def p_unop(p):
     '''unop : MINUS
             | NOT
-            | HASH'''
+            | LENGTH'''
 
 def p_empty(p):
     'empty :'
 
 def p_error(p):
-    print(f"Syntax error near '{p}'")
+    try:
+        print(f"{p.lexpos}: Syntax error near '{p.value}'")
+    except:
+        print(f"Syntax error near '{p}'")
+
+precedence = (
+        ('left', 'OR'),
+        ('left', 'AND'),
+        ('left', 'LESSTHAN', 'GREATERTHAN', 'LEQUALTHAN', 'GEQUALTHAN', 'DISTINCT', 'EQUALITY'),
+        ('left', 'PLUS', 'MINUS'),
+        ('left', 'MULTIPLY', 'DIVIDE', 'MODULO'),
+        ('left', 'NOT', 'LENGTH'),
+)
 
 parser = yacc.yacc()
