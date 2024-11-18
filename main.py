@@ -1,10 +1,11 @@
 from lua_interpreter.parser import parser
 from lua_interpreter.lexer import lexer
 
-lua_code = '''local suma = 0
-local numeros = {5,6,7}
-for n in numeros do
-    suma = suma + n
+lua_code = '''while 1 do
+    repeat
+        x = 1
+    until x > 10
+end
 '''
 
 def run():

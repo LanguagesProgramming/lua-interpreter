@@ -1,0 +1,46 @@
+[Lua]  [Parse Result] Syntax error near 'None'
+
+[Lua] function esPar(n) [Parse Result] Syntax error near 'None'
+
+[Lua] local par = false [Parse Result] 16: Syntax error near 'false'
+
+[Lua] if n%2 == 0 then [Parse Result] 4: Syntax error near 'if'
+
+[Lua] par = true [Parse Result] 14: Syntax error near 'true'
+
+[Lua] end [Parse Result] 4: Syntax error near 'end'
+
+[Lua] return par [Parse Result] 11: Syntax error near 'par'
+
+[Lua] end [Parse Result] 0: Syntax error near 'end'
+
+[Lua]  [Parse Result] Syntax error near 'None'
+
+[Lua] num = 25 [Parse Result] 8: Syntax error near '
+'
+
+[Lua] num2 = 150 [Parse Result] 10: Syntax error near '
+'
+
+[Lua] num3 = 78 [Parse Result] 9: Syntax error near '
+'
+
+[Lua] num4 = 51 [Parse Result] 9: Syntax error near '
+'
+
+[Lua] num5 = 40 [Parse Result] 9: Syntax error near '
+'
+
+[Lua]  [Parse Result] Syntax error near 'None'
+
+[Lua] local array = { 25, 150, 78, 51, 40 } [Parse Result] 37: Syntax error near '
+'
+
+[Lua]  [Parse Result] Syntax error near 'None'
+
+[Lua] for i = 1, #array do [Parse Result] Syntax error near 'None'
+
+[Lua] print("El numero es "array[i]) [Parse Result] 4: Syntax error near 'print'
+
+[Lua] end [Parse Result] 0: Syntax error near 'end'
+
