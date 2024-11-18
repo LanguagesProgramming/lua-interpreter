@@ -56,7 +56,8 @@ def p_local_assignment(p):
     '''local_assignment : LOCAL namelist
                       | LOCAL namelist EQUAL explist
                       | LOCAL NAME EQUAL explist
-                      | LOCAL NAME EQUAL var'''
+                      | LOCAL NAME EQUAL var
+                    | LOCAL namelist EQUAL explist'''
 
 def p_last_statement(p):
     '''last_statement : RETURN 
@@ -68,7 +69,7 @@ def p_funcname(p):
    
 def p_varlist(p):
     '''varlist : var 
-                | var COMMA varlist'''
+               | var COMMA varlist'''
 
 def p_var(p):
     '''var : NAME
