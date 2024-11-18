@@ -12,7 +12,8 @@ def p_list_statements(p):
                        | statement SEMICOLON list_statements'''
 
 def p_block(p):
-    'block : chunk'
+    '''block : chunk
+            | NEWLINE'''
 
 def p_statement(p):
     '''statement : assignment
@@ -34,10 +35,12 @@ def p_repeat_until(p):
     'repeat_until : REPEAT block UNTIL exp'
 #########
 
+###### Erick Lorenzo #######
 def p_for(p):
     '''for : FOR NAME EQUAL exp COMMA exp DO block END 
            | FOR namelist IN explist DO block END'''
- 
+#########
+
 def p_function_statement(p):
     'function_statement : FUNCTION funcname funcbody'
 
@@ -55,7 +58,7 @@ def p_last_statement(p):
 
 def p_funcname(p):
     '''funcname : NAME'''
-    
+   
 def p_varlist(p):
     '''varlist : var 
                 | var COMMA varlist'''
@@ -155,4 +158,5 @@ precedence = (
         ('left', 'NOT', 'LENGTH'),
 )
 
+start = 'chunk'
 parser = yacc.yacc()
