@@ -19,7 +19,22 @@ def p_statement(p):
                  | functioncall
                  | function_statement
                  | local_function_statement
-                 | local_assignment'''
+                 | local_assignment
+                 | while_do
+                 | repeat_until'''
+
+###### Ariel Vargas #######
+def p_while_do(p):
+    ''' 
+    while_do : WHILE exp DO block END
+    '''
+
+def p_repeat_until(p):
+    '''
+    repeat_until : REPEAT block UNTIL exp
+    '''
+
+#########
 
 def p_assignment(p):
     'assignment : varlist EQUAL explist'
@@ -125,11 +140,14 @@ def p_unop(p):
 def p_empty(p):
     'empty :'
 
+
+
 def p_error(p):
     try:
         print(f"{p.lexpos}: Syntax error near '{p.value}'")
     except:
         print(f"Syntax error near '{p}'")
+
 
 precedence = (
         ('left', 'OR'),
