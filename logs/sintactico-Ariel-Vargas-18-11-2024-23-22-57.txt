@@ -1,0 +1,40 @@
+[Lua]  [Parse Result] 
+
+[Lua] function esPar(n) [Parse Result] Syntax error near 'None'
+
+[Lua] local par = false [Parse Result] 
+
+[Lua] if n%2 == 0 then [Parse Result] Syntax error near 'None'
+
+[Lua] par = true [Parse Result] 
+
+[Lua] end [Parse Result] 4: Syntax error near 'end'
+
+[Lua] return par [Parse Result] 
+
+[Lua] end [Parse Result] 0: Syntax error near 'end'
+
+[Lua]  [Parse Result] 
+
+[Lua] num = 25 [Parse Result] 
+
+[Lua] num2 = 150 [Parse Result] 
+
+[Lua] num3 = 78 [Parse Result] 
+
+[Lua] num4 = 51 [Parse Result] 
+
+[Lua] num5 = 40 [Parse Result] 
+
+[Lua]  [Parse Result] 
+
+[Lua] local array = { 25, 150, 78, 51, 40 } [Parse Result] 
+
+[Lua]  [Parse Result] 
+
+[Lua] for i = 1, #array do [Parse Result] Syntax error near 'None'
+
+[Lua] print("El numero es "array[i]) [Parse Result] 25: Syntax error near 'array'
+
+[Lua] end [Parse Result] 0: Syntax error near 'end'
+

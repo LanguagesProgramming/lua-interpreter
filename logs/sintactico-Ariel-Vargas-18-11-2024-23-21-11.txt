@@ -1,0 +1,10 @@
+[Lua] local i = 1 [Parse Result] 
+
+[Lua] while i <= 5 do [Parse Result] Syntax error near 'None'
+
+[Lua] print("Contador: " .. i) [Parse Result] 
+
+[Lua] i = i + 1 [Parse Result] 
+
+[Lua] end [Parse Result] 0: Syntax error near 'end'
+
