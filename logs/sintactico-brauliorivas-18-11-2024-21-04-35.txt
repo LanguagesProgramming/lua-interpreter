@@ -1,0 +1,17 @@
+[Lua] local function bubble_sort(arr) ; local n = #arr ; for i = 1, n - 1 do ; for j = 1, n - i do ; if arr[j] > arr[j + 1] then arr[j], arr[j + 1] = arr[j + 1], arr[j] end end end end [Parse Result] 32: Syntax error near ';'
+71: Syntax error near ';'
+93: Syntax error near ';'
+167: Syntax error near 'end'
+
+[Lua]  [Parse Result] 
+
+[Lua] local array = { 5, 4, 3, 2, 1 } [Parse Result] 
+
+[Lua]  [Parse Result] 
+
+[Lua] bubble_sort(array) [Parse Result] 
+
+[Lua]  [Parse Result] 
+
+[Lua] for i = 1, #array do print(array[i]) end [Parse Result] 
+

@@ -2,10 +2,7 @@ from lua_interpreter.parser import parser
 from lua_interpreter.lexer import lexer
 
 lua_code = '''
-print()
-print(1)
-print(2, 3, hola)
-io.read()
+print() ; print(1) ; print(2, 3, hola) ; io.read()
 math = 4 + 5 * 8 / 4
 if 4 < 3 and t == True then print("Yes") end
 call = call_function()
