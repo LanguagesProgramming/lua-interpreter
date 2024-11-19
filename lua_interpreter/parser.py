@@ -3,9 +3,9 @@ from lua_interpreter.lexer import tokens
 
 def p_chunk(p):
     '''chunk : empty
-            | list_statements
-            | last_statement
-            | list_statements last_statement'''
+             | list_statements
+             | last_statement
+             | list_statements last_statement'''
 
 def p_list_statements(p):
     '''list_statements : statement
@@ -17,47 +17,56 @@ def p_block(p):
 def p_statement(p):
     '''statement : assignment
                  | functioncall
-                 | while_do
+                 | while
                  | repeat_until
+                 | if
                  | for
                  | function_statement
                  | local_function_statement
-                 | local_assignment
-                 | NEWLINE statement'''
+                 | local_assignment'''
 
 def p_assignment(p):
-    '''assignment : varlist EQUAL explist
-                    | NAME EQUAL exp
-                    | namelist EQUAL explist
-                    | NAME EQUAL explist
-                    | NAME EQUAL NUMBER
-                    | NAME EQUAL NAME'''
+    'assignment : varlist EQUAL explist'
 
 ###### Ariel Vargas #######
-def p_while_do(p):
-    'while_do : WHILE exp DO block END'
+def p_while(p):
+    'while : WHILE exp DO block END'
 
 def p_repeat_until(p):
     'repeat_until : REPEAT block UNTIL exp'
 #########
 
+###### Braulio Rivas  #######
+def p_if(p):
+    '''if : IF exp THEN block END
+          | IF exp THEN block elseif_list END
+          | IF exp THEN block elseif_list ELSE block END'''
+
+def p_elseif_list(p):
+    '''elseif_list : elseif
+                   | elseif elseif_list'''
+
+def p_elseif(p):
+    'elseif : ELSEIF exp THEN block'
+#########
+
 ###### Erick Lorenzo #######
 def p_for(p):
-    '''for : FOR NAME EQUAL exp COMMA exp DO list_statements END 
-           | FOR namelist IN NAME DO list_statements END'''
-#########
+    '''for : FOR NAME EQUAL exp COMMA exp DO block END 
+           | FOR namelist IN explist DO block END'''
 
 def p_function_statement(p):
     'function_statement : FUNCTION funcname funcbody'
+#########
 
+###### Ariel Vargas #######
 def p_local_function_statement(p):
     'local_function_statement : LOCAL FUNCTION NAME funcbody'
+#########
                       
 def p_local_assignment(p):
     '''local_assignment : LOCAL namelist
-                      | LOCAL namelist EQUAL explist
-                      | LOCAL NAME EQUAL explist
-                      | LOCAL NAME EQUAL var'''
+                        | LOCAL namelist EQUAL explist'''
 
 def p_last_statement(p):
     '''last_statement : RETURN 
@@ -73,9 +82,6 @@ def p_varlist(p):
 
 def p_var(p):
     '''var : NAME
-            | NAME LSQUAREDBRACKET NUMBER RSQUAREDBRACKET
-            | NAME LSQUAREDBRACKET var RSQUAREDBRACKET
-            | NUMBER
            | prefixexp LSQUAREDBRACKET exp RSQUAREDBRACKET
            | prefixexp DOT NAME'''
 
@@ -84,7 +90,8 @@ def p_namelist(p):
                 | NAME COMMA namelist'''
 
 def p_explist(p):
-    '''explist : LCURLYBRACKET varlist RCURLYBRACKET''' 
+    '''explist : exp
+               | exp COMMA explist''' 
 
 def p_exp(p):
     '''exp : NIL
@@ -93,9 +100,10 @@ def p_exp(p):
            | NUMBER
            | NAME
            | STRING
-           | TRIPLEDOT
+           | VARARGS
            | function
            | prefixexp
+           | tableconstructor
            | exp binop exp
            | unop exp'''
 
@@ -106,16 +114,17 @@ def p_prefixexp(p):
 
 def p_functioncall(p):
     '''functioncall : prefixexp args
-                    | prefixexp COLON NAME args
-                    | prefixexp DOT NAME'''
+                    | prefixexp COLON NAME args'''
 
 def p_args(p):
     '''args : LPAREN RPAREN
             | LPAREN explist RPAREN
             | STRING'''
 
+###### Braulio Rivas ######
 def p_function(p):
     'function : FUNCTION funcbody'
+######
 
 def p_funcbody(p):
     '''funcbody : LPAREN RPAREN block END
@@ -123,12 +132,27 @@ def p_funcbody(p):
 
 def p_parlist(p):
     '''parlist : namelist
-               | namelist COMMA TRIPLEDOT
-               | TRIPLEDOT'''
+               | namelist COMMA VARARGS
+               | VARARGS'''
+
+###### Erick Lorenzo ####### Lua has only one data structure
+def p_tableconstructor(p):
+    '''tableconstructor : LCURLYBRACKET RCURLYBRACKET
+                        | LCURLYBRACKET fieldlist RCURLYBRACKET'''
+
+def p_fieldlist(p):
+    '''fieldlist : field
+                 | field fieldsep fieldlist'''
+
+def p_field(p):
+    '''field : LSQUAREDBRACKET exp RSQUAREDBRACKET EQUAL exp
+             | NAME EQUAL exp 
+             | exp'''
 
 def p_fieldsep(p):
-    '''fielsep : COMMA
-               | SEMICOLON'''
+    '''fieldsep : COMMA
+                | SEMICOLON'''
+######
 
 def p_binop(p):
     '''binop : PLUS
@@ -136,6 +160,7 @@ def p_binop(p):
              | MULTIPLY 
              | DIVIDE
              | MODULO
+             | CONCATENATION
              | LESSTHAN
              | LEQUALTHAN
              | GREATERTHAN
@@ -158,7 +183,6 @@ def p_error(p):
         print(f"{p.lexpos}: Syntax error near '{p.value}'")
     except:
         print(f"Syntax error near '{p}'")
-
 
 precedence = (
         ('left', 'OR'),

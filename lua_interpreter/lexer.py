@@ -22,7 +22,6 @@ reserved = {
     'true' : 'TRUE',
     'until' : 'UNTIL',
     'while' : 'WHILE',
-    'print' : 'PRINT'
 }
 
 tokens = (
@@ -49,13 +48,13 @@ tokens = (
    'COMMA',
    'SEMICOLON',
    'COLON',
-   'DOT',   
-   'TRIPLEDOT',
+   'DOT',
+   'CONCATENATION',
+   'VARARGS',
    'NUMBER',
    'NAME',
    'STRING',
    'COMMENT',
-   'NEWLINE'
 ) + tuple(reserved.values())
 
 t_PLUS    = r'\+'
@@ -81,15 +80,11 @@ t_RSQUAREDBRACKET = r'\]'
 t_COMMA = r','
 t_SEMICOLON = r';'
 t_COLON = r':'
-t_TRIPLEDOT = r'\.\.\.'
+t_VARARGS = r'\.\.\.'
+t_CONCATENATION = r'\.\.' 
 t_DOT = r'\.'
 t_ignore  = ' \t'
-
-def t_NEWLINE(t):
-    r'(\r\n|\n|\r)+'
-    t.lexer.lineno += len(t.value)
-    return t;
-    
+   
 def t_NUMBER(t):
     r'0[xX][0-9a-fA-F]+|\d+(\.\d*)?([eE][+-]?\d+)?'
     if t.value.lower().startswith("0x"):
@@ -135,7 +130,7 @@ def t_newline(t):
     t.lexer.lineno += len(t.value)
 
 def t_error(t):
-    print(f"{t.lineno}:{t.lexpos}: unexpected symbol {t.value[0]}" )
+    print(f"{t.lineno}:{t.lexpos}: unexpected symbol '{t.value[0]}'" )
     t.lexer.skip(1)
 
 lexer = lex.lex()
