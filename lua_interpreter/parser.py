@@ -1,5 +1,8 @@
 from lua_interpreter.ply import yacc as yacc
 from lua_interpreter.lexer import tokens
+from collections import deque
+
+symbols = {}
 
 def p_chunk(p):
     '''chunk : empty
@@ -27,6 +30,32 @@ def p_statement(p):
 
 def p_assignment(p):
     'assignment : varlist EQUAL explist'
+    varlist = p[1].split(", ")
+    len_varlist = len(varlist)
+    explist = p[3]
+
+    if type(explist) == deque:
+        len_explist = len(explist)
+        if len_varlist >= len_explist:
+            i = 0
+            for exp in explist:
+                var = varlist[i]
+                symbols[var] = exp
+                i += 1
+
+            while i < len_varlist:
+                var = varlist[i]
+                symbols[var] = Nil()
+                i += 1 
+    elif len_varlist != 1:
+        symbols[varlist[0]] = explist
+
+        i = 1
+        for x in range(i, len_varlist):
+            var = varlist[x]
+            symbols[var] = Nil()
+    else:
+        symbols[p[1]] = p[3]
 
 ###### Ariel Vargas #######
 def p_while(p):
@@ -41,6 +70,10 @@ def p_if(p):
     '''if : IF exp THEN block END
           | IF exp THEN block elseif_list END
           | IF exp THEN block elseif_list ELSE block END'''
+
+    if len(p) == 6:
+        pass
+
 
 def p_elseif_list(p):
     '''elseif_list : elseif
@@ -79,11 +112,18 @@ def p_funcname(p):
 def p_varlist(p):
     '''varlist : var 
                | var COMMA varlist'''
+    if len(p) == 4:
+        p[0] = f"{p[1]}, {p[3]}"
+    else:
+        p[0] = p[1]
+
 
 def p_var(p):
     '''var : NAME
            | prefixexp LSQUAREDBRACKET exp RSQUAREDBRACKET
            | prefixexp DOT NAME'''
+    if len(p) == 2:
+        p[0] = p[1]
 
 def p_namelist(p):
     '''namelist : NAME
@@ -92,7 +132,23 @@ def p_namelist(p):
 def p_explist(p):
     '''explist : exp
                | exp COMMA explist''' 
+    
+    if len(p) == 2:
+        p[0] = p[1]
+    else:
+        if type(p[3]) == deque:
+            p[3].appendleft(p[1])
+            p[0] = p[3] 
+        else:
+            values = deque()
+            values.append(p[1])
+            values.append(p[3])
+            p[0] = values
 
+class Nil:
+    pass
+
+    
 def p_exp(p):
     '''exp : NIL
            | FALSE
@@ -106,6 +162,33 @@ def p_exp(p):
            | tableconstructor
            | exp binop exp
            | unopexp'''
+
+    if len(p) == 4:
+        binop = p[2]
+        first_exp = p[1]
+        first_type = type(first_exp)
+        second_exp = p[3]
+        second_type = type(second_exp)
+
+        if binop == '..':
+            valid = (first_type == int or second_type == str) and (second_type == int or second_type == str)
+            
+            if not valid:
+                print("stdin: attempt to concatenate an invalid value")
+
+    if type(p[1]) == int or type(p[1]) == str:
+        if p[1] == 'true':
+            p[0] = True
+        elif p[1] == 'false':
+            p[0] = False
+        elif p[1] == 'nil':
+            p[0] = Nil()
+        else:
+            p[0] = p[1]
+
+        return
+
+    p[0] = p[1]
 
 def p_unoexp(p):
     '''unopexp : expr_uminus
@@ -126,6 +209,8 @@ def p_prefixexp(p):
     '''prefixexp : var 
                  | functioncall
                  | LPAREN exp RPAREN'''
+    p[0] = p[1]
+
 
 def p_functioncall(p):
     '''functioncall : prefixexp args
@@ -185,6 +270,7 @@ def p_binop(p):
              | DISTINCT
              | AND
              | OR'''
+    p[0] = p[1]
 
 def p_empty(p):
     'empty :'

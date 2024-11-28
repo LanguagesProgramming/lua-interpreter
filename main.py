@@ -2,11 +2,23 @@ from lua_interpreter.parser import parser
 from lua_interpreter.lexer import lexer
 
 lua_code = '''
-print() ; print(1) ; print(2, 3, hola) ; io.read()
-math = 4 + 5 * 8 / 4
-if 4 < 3 and t == True then print("Yes") end
-call = call_function()
-array = {1, 2, 3}
+-- Definition of variables
+a, b, c, d = 1, 2, 3, 4
+a = 2
+a, b = 2
+a = 2, 4
+c = "asdsa"
+z = true
+x = false
+f = nil
+
+if a then hi = 'x' end
+if 3 then x = 23 end
+
+v = "5" + 4
+g = "adsd" + true
+h = "asfsads"..true
+k = "asds"..'asdasd'
 '''
 
 def run():
