@@ -105,7 +105,22 @@ def p_exp(p):
            | prefixexp
            | tableconstructor
            | exp binop exp
-           | unop exp'''
+           | unopexp'''
+
+def p_unoexp(p):
+    '''unopexp : expr_uminus
+               | not_exp
+               | length_exp'''
+
+def p_expr_uminus(p):
+    'expr_uminus : MINUS exp %prec UMINUS'
+    p[0] = -p[2]
+
+def p_not_exp(p):
+    'not_exp : NOT exp'
+
+def p_length_exp(p):
+    'length_exp : LENGTH exp'
 
 def p_prefixexp(p):
     '''prefixexp : var 
@@ -159,6 +174,7 @@ def p_binop(p):
              | MINUS
              | MULTIPLY 
              | DIVIDE
+             | CARET
              | MODULO
              | CONCATENATION
              | LESSTHAN
@@ -169,11 +185,6 @@ def p_binop(p):
              | DISTINCT
              | AND
              | OR'''
-
-def p_unop(p):
-    '''unop : MINUS
-            | NOT
-            | LENGTH'''
 
 def p_empty(p):
     'empty :'
@@ -188,9 +199,11 @@ precedence = (
         ('left', 'OR'),
         ('left', 'AND'),
         ('left', 'LESSTHAN', 'GREATERTHAN', 'LEQUALTHAN', 'GEQUALTHAN', 'DISTINCT', 'EQUALITY'),
+        ('right', 'CONCATENATION'),
         ('left', 'PLUS', 'MINUS'),
         ('left', 'MULTIPLY', 'DIVIDE', 'MODULO'),
-        ('left', 'NOT', 'LENGTH'),
+        ('left', 'NOT', 'LENGTH', 'UMINUS'),
+        ('right', 'CARET'),
 )
 
 start = 'block'

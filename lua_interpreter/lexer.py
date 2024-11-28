@@ -27,6 +27,7 @@ reserved = {
 tokens = (
    'PLUS',
    'MINUS',
+   'UMINUS',
    'MULTIPLY',
    'DIVIDE',
    'MODULO',
@@ -59,6 +60,7 @@ tokens = (
 
 t_PLUS    = r'\+'
 t_MINUS   = r'-'
+t_UMINUS = r'-'
 t_MULTIPLY   = r'\*'
 t_DIVIDE = r'\/'
 t_MODULO = r'%'
