@@ -32,9 +32,11 @@ v = #2
 
 def run(string = None):
     if type(string) == str:
-        lua_code = string
+        code = string
+    else:
+        code = lua_code
 
-    lexer.input(lua_code)
+    lexer.input(code)
     print("\nLexical Analysis\n")
     while True:
         tok = lexer.token()
@@ -44,7 +46,7 @@ def run(string = None):
     print("\nEnd of Lexical Analysis\n")
 
     print("\nParsing\n")
-    lines = lua_code.split("\n")
+    lines = code.split("\n")
     for line in lines:
         parser.parse(line)
 
