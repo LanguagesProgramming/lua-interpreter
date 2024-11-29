@@ -1,0 +1,243 @@
+[Lua] -- Problemas de las 8 reinas [Parse Result] 
+
+[Lua] function imprimir(tablero, letras, n) [Parse Result] Syntax error near 'None'
+
+[Lua] -- Imprime cabecera [Parse Result] 
+
+[Lua] print("   ") [Parse Result] 
+
+[Lua]  [Parse Result] 
+
+[Lua] for i = 0, #n-1 do [Parse Result] stdin: attempt to get length of a nil value
+stdin: Attempt to perform arithmetic operation on None
+Syntax error near 'None'
+
+[Lua] print(" " + letras[i] + "     ") [Parse Result] 
+
+[Lua] i++ [Parse Result] 9: Syntax error near '+'
+
+[Lua] end [Parse Result] 4: Syntax error near 'end'
+
+[Lua]  [Parse Result] 
+
+[Lua] print("\n") [Parse Result] 
+
+[Lua]  [Parse Result] 
+
+[Lua] -- Imprime tablero - filas 0 a (n - 1) [Parse Result] 
+
+[Lua] for i = 0, #n-1 do [Parse Result] stdin: attempt to get length of a nil value
+stdin: Attempt to perform arithmetic operation on None
+Syntax error near 'None'
+
+[Lua]  [Parse Result] 
+
+[Lua] -- Imprime índice de fila [Parse Result] 
+
+[Lua] print((i + 1)) [Parse Result] stdin: Attempt to perform arithmetic operation on i
+
+[Lua]  [Parse Result] 
+
+[Lua] -- Imprime fila i - Columnas 0 a (n - 1) [Parse Result] 
+
+[Lua] for j = 0, #n-1 do [Parse Result] stdin: attempt to get length of a nil value
+stdin: Attempt to perform arithmetic operation on None
+Syntax error near 'None'
+
+[Lua] print("   " + tablero[i][j] + "   ") [Parse Result] 
+
+[Lua]  [Parse Result] 
+
+[Lua] j++ [Parse Result] 13: Syntax error near '+'
+
+[Lua] end [Parse Result] 8: Syntax error near 'end'
+
+[Lua]  [Parse Result] 
+
+[Lua] i++ [Parse Result] 9: Syntax error near '+'
+
+[Lua]  [Parse Result] 
+
+[Lua] print("\n\n") [Parse Result] 
+
+[Lua] end [Parse Result] 4: Syntax error near 'end'
+
+[Lua] end [Parse Result] 0: Syntax error near 'end'
+
+[Lua]  [Parse Result] 
+
+[Lua] function posicionVerdadera(fila, columna, tablero) [Parse Result] Syntax error near 'None'
+
+[Lua] -- Verificar que la fila actual sea segura, verificando cada columna de esta [Parse Result] 
+
+[Lua] for iterColumna = 1, #tablero do [Parse Result] stdin: attempt to get length of a nil value
+Syntax error near 'None'
+
+[Lua] if iterColumna ~= columna then [Parse Result] Syntax error near 'None'
+
+[Lua] if tablero[fila][iterColumna] == 1 then [Parse Result] Syntax error near 'None'
+
+[Lua] return false [Parse Result] 
+
+[Lua] end [Parse Result] 12: Syntax error near 'end'
+
+[Lua] end [Parse Result] 8: Syntax error near 'end'
+
+[Lua] end [Parse Result] 4: Syntax error near 'end'
+
+[Lua]  [Parse Result] 
+
+[Lua] -- Verificar que la columna actual sea segura, verificando cada fila de esta [Parse Result] 
+
+[Lua] for iterFila = 1, #tablero do [Parse Result] stdin: attempt to get length of a nil value
+Syntax error near 'None'
+
+[Lua] if iterFila ~= fila then [Parse Result] Syntax error near 'None'
+
+[Lua] if tablero[iterFila][columna] == 1 then [Parse Result] Syntax error near 'None'
+
+[Lua] return false [Parse Result] 
+
+[Lua] end [Parse Result] 12: Syntax error near 'end'
+
+[Lua] end [Parse Result] 8: Syntax error near 'end'
+
+[Lua] end [Parse Result] 4: Syntax error near 'end'
+
+[Lua]  [Parse Result] 
+
+[Lua] -- Verificar que la diagonal superior (pendiente positiva) sea segura [Parse Result] 
+
+[Lua] -- Buscar el extremo izquierdo de la diagonal superior [Parse Result] 
+
+[Lua] local iterColumna = columna [Parse Result] 
+
+[Lua] local iterFila = fila [Parse Result] 
+
+[Lua]  [Parse Result] 
+
+[Lua] while iterColumna > 1 and iterFila < #tablero do [Parse Result] stdin: attempt to get length of a nil value
+stdin: Attempt to perform arithmetic operation on iterFila
+stdin: Attempt to perform arithmetic operation on and None
+stdin: Attempt to perform arithmetic operation on iterColumna
+Syntax error near 'None'
+
+[Lua] iterFila = iterFila + 1 [Parse Result] stdin: Attempt to perform arithmetic operation on iterFila
+
+[Lua] iterColumna = iterColumna - 1 [Parse Result] stdin: Attempt to perform arithmetic operation on iterColumna
+
+[Lua] end [Parse Result] 4: Syntax error near 'end'
+
+[Lua]  [Parse Result] 
+
+[Lua] -- Recorrer toda la diagonal excepto la posición marcada por los parámetros fila, columna [Parse Result] 
+
+[Lua] while iterFila >= 1 and iterColumna <= #tablero do [Parse Result] stdin: attempt to get length of a nil value
+stdin: Attempt to perform arithmetic operation on iterColumna
+stdin: Attempt to perform arithmetic operation on and None
+Syntax error near 'None'
+
+[Lua] if not (iterFila == fila and iterColumna == columna) then [Parse Result] Syntax error near 'None'
+
+[Lua] if tablero[iterFila][iterColumna] == 1 then [Parse Result] Syntax error near 'None'
+
+[Lua] return false [Parse Result] 
+
+[Lua] end [Parse Result] 12: Syntax error near 'end'
+
+[Lua] end [Parse Result] 8: Syntax error near 'end'
+
+[Lua] iterFila = iterFila - 1 [Parse Result] stdin: Attempt to perform arithmetic operation on iterFila
+
+[Lua] iterColumna = iterColumna + 1 [Parse Result] stdin: Attempt to perform arithmetic operation on iterColumna
+
+[Lua] end [Parse Result] 4: Syntax error near 'end'
+
+[Lua]  [Parse Result] 
+
+[Lua] -- Verificar que la diagonal inferior (pendiente negativa) sea segura [Parse Result] 
+
+[Lua] -- Buscar el extremo izquierdo de la diagonal inferior [Parse Result] 
+
+[Lua] iterColumna = columna [Parse Result] 
+
+[Lua] iterFila = fila [Parse Result] 
+
+[Lua]  [Parse Result] 
+
+[Lua] while iterColumna > 1 and iterFila > 1 do [Parse Result] stdin: Attempt to perform arithmetic operation on iterFila
+stdin: Attempt to perform arithmetic operation on iterColumna
+Syntax error near 'None'
+
+[Lua] iterFila = iterFila - 1 [Parse Result] stdin: Attempt to perform arithmetic operation on iterFila
+
+[Lua] iterColumna = iterColumna - 1 [Parse Result] stdin: Attempt to perform arithmetic operation on iterColumna
+
+[Lua] end [Parse Result] 4: Syntax error near 'end'
+
+[Lua]  [Parse Result] 
+
+[Lua] -- Recorrer toda la diagonal excepto la posición marcada por los parámetros fila, columna [Parse Result] 
+
+[Lua] while iterFila <= #tablero and iterColumna <= #tablero do [Parse Result] stdin: attempt to get length of a nil value
+stdin: attempt to get length of a nil value
+stdin: Attempt to perform arithmetic operation on iterColumna
+stdin: Attempt to perform arithmetic operation on and None
+stdin: Attempt to perform arithmetic operation on iterFila
+stdin: Attempt to perform arithmetic operation on and None
+Syntax error near 'None'
+
+[Lua] print("iterFila = " .. iterFila .. ", iterColumna = " .. iterColumna) [Parse Result] 
+
+[Lua] if not (iterFila == fila and iterColumna == columna) then [Parse Result] Syntax error near 'None'
+
+[Lua] if tablero[iterFila][iterColumna] == 1 then [Parse Result] Syntax error near 'None'
+
+[Lua] return false [Parse Result] 
+
+[Lua] end [Parse Result] 12: Syntax error near 'end'
+
+[Lua] end [Parse Result] 8: Syntax error near 'end'
+
+[Lua] iterFila = iterFila + 1 [Parse Result] stdin: Attempt to perform arithmetic operation on iterFila
+
+[Lua] iterColumna = iterColumna + 1 [Parse Result] stdin: Attempt to perform arithmetic operation on iterColumna
+
+[Lua] end [Parse Result] 4: Syntax error near 'end'
+
+[Lua]  [Parse Result] 
+
+[Lua] -- Verifica que no hayan atacantes ni en sus lados, ni en sus diagonales (y en la columna) [Parse Result] 
+
+[Lua] return true [Parse Result] 
+
+[Lua] end [Parse Result] 0: Syntax error near 'end'
+
+[Lua]  [Parse Result] 
+
+[Lua]  [Parse Result] 
+
+[Lua] function solucion(columna, tablero) [Parse Result] Syntax error near 'None'
+
+[Lua] -- Caso base: si la solucion es la correcta [Parse Result] 
+
+[Lua] if columna >= n then [Parse Result] Syntax error near 'None'
+
+[Lua] return true [Parse Result] 
+
+[Lua] end [Parse Result] 4: Syntax error near 'end'
+
+[Lua]  [Parse Result] 
+
+[Lua] -- Se considera la columna actual como una posible solución y se verifica [Parse Result] 
+
+[Lua] for i = 0, #n-1 do [Parse Result] stdin: attempt to get length of a nil value
+stdin: Attempt to perform arithmetic operation on None
+Syntax error near 'None'
+
+[Lua] -- verifica si se puede colocar en el tablero[i][columna] [Parse Result] 
+
+[Lua] if posicionVerdadera(i, columna) then [Parse Result] Syntax error near 'None'
+
+[Lua]  [Parse Result] 
+

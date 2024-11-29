@@ -1,0 +1,62 @@
+[Lua] -- Busqueda binaria [Parse Result] 
+
+[Lua]  [Parse Result] 
+
+[Lua] function busquedaBinaria(array, item) [Parse Result] Syntax error near 'None'
+
+[Lua] local primero = 0 [Parse Result] 
+
+[Lua] local ultimo = #array - 1 [Parse Result] stdin: attempt to get length of a nil value
+stdin: Attempt to perform arithmetic operation on None
+
+[Lua] local encontrado = false [Parse Result] 
+
+[Lua] local indice = -1 [Parse Result] 
+
+[Lua]  [Parse Result] 
+
+[Lua] while (primero<=ultimo and not encontrado) do [Parse Result] stdin: Attempt to perform arithmetic operation on primero
+stdin: Attempt to perform arithmetic operation on and ultimo
+Syntax error near 'None'
+
+[Lua] local puntoMedio = (primero + ultimo)/2 [Parse Result] stdin: Attempt to perform arithmetic operation on primero
+stdin: Attempt to perform arithmetic operation on and ultimo
+stdin: Attempt to perform arithmetic operation on (
+
+[Lua] if array[puntoMedio] == item then [Parse Result] Syntax error near 'None'
+
+[Lua] encontrado = True [Parse Result] 
+
+[Lua] -- Si el valor buscado fue encontrado, se agrega el indice donde esta el valor [Parse Result] 
+
+[Lua] indice = puntoMedio [Parse Result] 
+
+[Lua] elseif item < array[puntoMedio] then [Parse Result] 8: Syntax error near 'elseif'
+40: Syntax error near 'then'
+
+[Lua] ultimo = puntoMedio-1 [Parse Result] stdin: Attempt to perform arithmetic operation on puntoMedio
+
+[Lua] else [Parse Result] 12: Syntax error near 'else'
+
+[Lua] primero = puntoMedio+1 [Parse Result] stdin: Attempt to perform arithmetic operation on puntoMedio
+
+[Lua] end [Parse Result] 12: Syntax error near 'end'
+
+[Lua] end [Parse Result] 8: Syntax error near 'end'
+
+[Lua] end [Parse Result] 4: Syntax error near 'end'
+
+[Lua]  [Parse Result] 
+
+[Lua] return indice [Parse Result] 
+
+[Lua] end [Parse Result] 0: Syntax error near 'end'
+
+[Lua]  [Parse Result] 
+
+[Lua] valoresPrueba = {0, 1, 2, 8, 13, 17, 19, 32, 42} [Parse Result] 
+
+[Lua] print(busquedaBinaria(valoresPrueba, 3)) [Parse Result] 
+
+[Lua] print(busquedaBinaria(valoresPrueba, 13)) [Parse Result] 
+

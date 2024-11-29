@@ -42,23 +42,54 @@ def seleccionar_archivo():
 
 ventana = tk.Tk()
 ventana.title("Entrada de texto o archivo")
+ventana.geometry("700x500")
+ventana.configure(bg="#f0f8ff")
 
-archivo_ruta = ""
+# Estilo y widgets
+titulo = tk.Label(
+    ventana, text="¡Bienvenido!", font=("Arial", 18, "bold"), bg="#4682b4", fg="white"
+)
+titulo.pack(pady=10, fill=tk.X)
 
-label_texto = tk.Label(ventana, text="Ingrese texto:")
+label_texto = tk.Label(
+    ventana, text="Ingrese texto:", font=("Arial", 12, "bold"), bg="#f0f8ff", fg="#333"
+)
 label_texto.pack(pady=5)
-entrada_texto = tk.Text(ventana, height=15, width=60)
+
+entrada_texto = tk.Text(
+    ventana, height=10, width=70, font=("Arial", 10), bd=2, relief="groove", wrap=tk.WORD
+)
 entrada_texto.pack(pady=5)
 
-label_archivo = tk.Label(ventana, text="No se ha seleccionado ningún archivo.")
+label_archivo = tk.Label(
+    ventana, text="No se ha seleccionado ningún archivo.",
+    font=("Arial", 10), bg="#f0f8ff", fg="#8b0000"
+)
 label_archivo.pack(pady=5)
-boton_archivo = tk.Button(ventana, text="Seleccionar archivo", command=seleccionar_archivo)
+
+boton_archivo = tk.Button(
+    ventana, text="Seleccionar archivo",
+    font=("Arial", 11), bg="#4682b4", fg="white", activebackground="#5a9bd4",
+    activeforeground="white", command=seleccionar_archivo
+)
 boton_archivo.pack(pady=5)
 
-boton = tk.Button(ventana, text="Aceptar", command=imprimir_contenido)
+boton = tk.Button(
+    ventana, text="Aceptar",
+    font=("Arial", 11), bg="#32cd32", fg="white", activebackground="#3e8c3e",
+    activeforeground="white", command=imprimir_contenido
+)
 boton.pack(pady=10)
 
-salida_texto = tk.Text(ventana, height=5, width=60)
+salida_texto = tk.Text(
+    ventana, height=8, width=70, font=("Arial", 10), bd=2, relief="sunken", wrap=tk.WORD
+)
 salida_texto.pack(padx=10, pady=10)
+
+# Pie de página
+footer = tk.Label(
+    ventana, text="Desarrollado por Erick, Braulio y Ariel", font=("Arial", 9, "italic"), bg="#f0f8ff", fg="#666"
+)
+footer.pack(side=tk.BOTTOM, pady=10)
 
 ventana.mainloop()
