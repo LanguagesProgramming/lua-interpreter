@@ -30,7 +30,10 @@ v = #2
 
 '''
 
-def run():
+def run(string = None):
+    if type(string) == str:
+        lua_code = string
+
     lexer.input(lua_code)
     print("\nLexical Analysis\n")
     while True:

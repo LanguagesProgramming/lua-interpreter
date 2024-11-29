@@ -1,18 +1,31 @@
+import io
+from main import run 
 import tkinter as tk
 from tkinter import filedialog, messagebox
-from interpreter import interpret
+from contextlib import redirect_stdout
 
 def imprimir_contenido():
     texto_ingresado = entrada_texto.get("1.0", tk.END).strip()
     if texto_ingresado:
         salida_texto.delete("1.0", tk.END)
-        salida_texto.insert(tk.END, interpret(texto_ingresado))
+
+        with io.StringIO() as stream:
+            with redirect_stdout(stream):
+                run(texto_ingresado)
+
+            s = stream.getvalue()
+            salida_texto.insert(tk.END, s)
     elif archivo_ruta:
         try:
             with open(archivo_ruta, 'r') as f:
                 contenido = f.read()
                 salida_texto.delete("1.0", tk.END)
-                salida_texto.insert(tk.END, interpret(contenido))
+
+                with io.StringIO() as stream:
+                    with redirect_stdout(stream):
+                        run(texto_ingresado)
+                    s = stream.getvalue()
+                    salida_texto.insert(tk.END, s)
         except Exception as e:
             salida_texto.delete("1.0", tk.END)
             salida_texto.insert(tk.END, f"Error al leer el archivo: {e}")
