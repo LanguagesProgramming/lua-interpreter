@@ -82,7 +82,7 @@ boton = tk.Button(
 boton.pack(pady=10)
 
 salida_texto = tk.Text(
-    ventana, height=8, width=70, font=("Arial", 10), bd=2, relief="sunken", wrap=tk.WORD
+    ventana, height=20, width=70, font=("Arial", 10), bd=2, relief="sunken", wrap=tk.WORD
 )
 salida_texto.pack(padx=10, pady=10)
 
