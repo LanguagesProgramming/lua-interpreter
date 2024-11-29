@@ -23,7 +23,7 @@ def imprimir_contenido():
 
                 with io.StringIO() as stream:
                     with redirect_stdout(stream):
-                        run(texto_ingresado)
+                        run(contenido)
                     s = stream.getvalue()
                     salida_texto.insert(tk.END, s)
         except Exception as e:
