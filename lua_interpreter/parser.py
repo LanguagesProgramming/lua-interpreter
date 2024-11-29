@@ -4,6 +4,9 @@ from collections import deque
 
 symbols = {}
 
+def symbol_exists(symbol):
+    return symbol in symbols
+
 def p_chunk(p):
     '''chunk : empty
              | list_statements
@@ -28,11 +31,14 @@ def p_statement(p):
                  | local_function_statement
                  | local_assignment'''
 
+# Automatic assign nil if not defined
 def p_assignment(p):
     'assignment : varlist EQUAL explist'
     varlist = p[1].split(", ")
     len_varlist = len(varlist)
     explist = p[3]
+
+    # print(p[1], p[3])
 
     if type(explist) == deque:
         len_explist = len(explist)
@@ -148,8 +154,25 @@ def p_explist(p):
 class Nil:
     pass
 
-    
-def p_exp(p):
+def parse_number(number_string):
+    if type(number_string) == str:
+        number_string = number_string.replace("\"", "")
+
+    try:
+        integer = int(number_string)
+        return integer
+    except:
+        pass
+
+    try:
+        floating = float(number_string)
+        return floating
+    except:
+        pass
+
+    raise Exception("Not able to parse number") 
+
+def p_exp(p): 
     '''exp : NIL
            | FALSE
            | TRUE
@@ -170,12 +193,25 @@ def p_exp(p):
         second_exp = p[3]
         second_type = type(second_exp)
 
+        arithmetic_operators = {"+", "-", "*", "/", "^", "%", "<", "<=", ">"}
+        if binop in arithmetic_operators:
+            try:
+                parse_number(first_exp)
+            except:
+                print(f"stdin: Attempt to perform arithmetic operation on {first_exp}")
+
+            try:
+                parse_number(second_exp)
+            except:
+                print(f"stdin: Attempt to perform arithmetic operation on and {second_exp}")
+            
         if binop == '..':
             valid = (first_type == int or second_type == str) and (second_type == int or second_type == str)
             
             if not valid:
-                print("stdin: attempt to concatenate an invalid value")
-
+                print(f"stdin: Attempt to concatenate an invalid value between {first_exp} and {second_exp}")
+    
+        
     if type(p[1]) == int or type(p[1]) == str:
         if p[1] == 'true':
             p[0] = True
@@ -194,6 +230,8 @@ def p_unoexp(p):
     '''unopexp : expr_uminus
                | not_exp
                | length_exp'''
+    
+    p[0] = p[1]
 
 def p_expr_uminus(p):
     'expr_uminus : MINUS exp %prec UMINUS'
@@ -204,6 +242,20 @@ def p_not_exp(p):
 
 def p_length_exp(p):
     'length_exp : LENGTH exp'
+    
+    expression = p[2]
+    if type(expression) == int:
+        print("stdin: attempt to get lenght of number")
+    elif symbol_exists(expression):
+        val = symbols[expression]
+        if isinstance(val, Table):
+            val: Table = val
+            p[0] = val.size()
+        else:
+            print(f"stdin: attempt to get length of value {val}")
+    else:
+        print("stdin: attempt to get length of a nil value")
+
 
 def p_prefixexp(p):
     '''prefixexp : var 
@@ -235,19 +287,82 @@ def p_parlist(p):
                | namelist COMMA VARARGS
                | VARARGS'''
 
+class Table:
+    def __init__(self, items = None):
+        self.dic: dict = {}
+        self.set: set = set()
+        self.length: int = 0
+
+    def add(self, val):
+        if type(val) == tuple:
+            [k, v] = val
+            self.dic[k] = v
+        else:
+            self.set.add(val)
+
+        self.length += 1
+
+    def size(self):
+        return self.length
+
+    def __repr__(self) -> str:
+        return "table"
+
+    def __str__(self):
+        string = "{"
+        for k, v in self.dic.items():
+            string = string + f"{k}: {v}, "
+
+        for val in self.set:
+            string = string + f"{val}, "
+
+        if len(string) > 1:
+            string = string[:-2]
+
+        return string + "}"
+        
+
+
 ###### Erick Lorenzo ####### Lua has only one data structure
 def p_tableconstructor(p):
     '''tableconstructor : LCURLYBRACKET RCURLYBRACKET
                         | LCURLYBRACKET fieldlist RCURLYBRACKET'''
 
+    if len(p) == 3:
+        p[0] = Table()
+    else:
+        p[0] = p[2]
+
+
 def p_fieldlist(p):
     '''fieldlist : field
                  | field fieldsep fieldlist'''
+
+    if len(p) == 2:
+        fieldlist = p[0]
+        if isinstance(fieldlist, Table):
+            fieldlist.add(p[1])
+        else:
+            table = Table()
+            table.add(p[1])
+            p[0] = table
+            table = Table()
+            table.add(p[1])
+            p[0] = table
+    else:
+        table = p[3]
+        table.add(p[1])
+        p[0] = table
 
 def p_field(p):
     '''field : LSQUAREDBRACKET exp RSQUAREDBRACKET EQUAL exp
              | NAME EQUAL exp 
              | exp'''
+
+    if len(p) == 2:
+        p[0] = p[1]
+    elif len(p) == 4:
+        p[0] = (p[1], p[3])
 
 def p_fieldsep(p):
     '''fieldsep : COMMA

@@ -19,6 +19,15 @@ v = "5" + 4
 g = "adsd" + true
 h = "asfsads"..true
 k = "asds"..'asdasd'
+j = 234 + 23.2
+g = 1 + 2 + 3 + 4
+d = {}
+b = {2}
+j = {1, 3, var = "hola"}
+b = #j
+f = #g
+v = #2
+
 '''
 
 def run():
